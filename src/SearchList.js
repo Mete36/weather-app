@@ -2,8 +2,8 @@ import React from 'react';
 
 import { withStyles } from '@material-ui/core/styles';
 
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import {Container, Row, Col} from 'react-grid-system';
+import WeatherCard from './WeatherCard';
 
 const styles = {
     card: {
@@ -32,16 +32,13 @@ const SearchList = (props) => {
   
 
   return(
-      <div>
-          <Card className={classes.card}>
-              <CardContent>
-                  {weather.name}
-                  {weather.weather[0].main}
-                  {weather.sys.country}
-                  {weather.main.temp_max}
-              </CardContent>
-          </Card>
-      </div>
+    <Container>
+      <Row justify="center">
+          <Col lg={4}>
+            <WeatherCard city={props.city} temp={props.temp} type={props.type} iconId={props.iconId}/>
+          </Col>
+      </Row>
+    </Container>
   )
 }
 

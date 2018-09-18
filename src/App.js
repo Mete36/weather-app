@@ -8,8 +8,12 @@ class App extends Component {
 
   state = {
     searchValue: '',
-    searchData: [],
-    renderList: false
+    city: '',
+    temp: '',
+    country: '',
+    type: '',
+    renderList: false,
+    iconId: ''
   }
 
   apiCall = (city) => {
@@ -19,7 +23,11 @@ class App extends Component {
       return results.json();
     }).then(data => {
       this.setState({
-        searchData:data
+        city:data.name,
+        temp: data.main.temp_max,
+        country: data.sys.country,
+        type: data.weather[0].main,
+        iconId: data.weather[0].id
       });
       console.log(data);
     }).catch(function(error){
@@ -31,16 +39,14 @@ class App extends Component {
     this.setState({searchValue: e.target.value, renderList: true});
     const city = e.target.elements.city.value;
     this.apiCall(city);
-    console.log(this.state.searchData);
   }
   handleChange = (e) => {
     this.setState({searchValue: e.target.value});
   }
   renderList = () => {
+    console.log(this.state.iconId);
     if(this.state.renderList){
-      return <SearchList weather={this.state.searchData} />;
-    } else {
-      return 'mete';
+      return <SearchList city={this.state.city} temp={this.state.temp} type={this.state.type} iconId="802"/>;
     }
   }
 
@@ -54,9 +60,9 @@ class App extends Component {
 
         <SearchBar onSubmit={this.submitSearch} />
         {console.log(this.state.searchData)}
+        {console.log(this.state.iconId)}
         {this.renderList()}
         {/* <SearchList weather={this.state.searchData} /> */}
-
       </div>
     );
   }
