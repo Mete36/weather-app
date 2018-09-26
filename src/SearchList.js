@@ -21,18 +21,14 @@ const styles = {
     pos: {
       marginBottom: 12,
     },
+    container: {
+      marginTop: 80
+    }
   };
 
 const SearchList = (props) => {
-  const { classes } = props;
-
-  const weather = props.weather;
-  console.log(weather);
-
-  
-
   return(
-    <Container>
+    <Container style={styles.container}>
       <Row justify="center">
           <Col lg={4}>
             <WeatherCard city={props.city} temp={props.temp} type={props.type} iconId={props.iconId}/>

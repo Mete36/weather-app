@@ -3,3 +3,61 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.data_card.active{
+	animation: slide 0.5s linear;
+}
+.data_card.inactive{
+	animation: slide2 0.5s linear;
+}
+.bg_image{
+  animation: fade 0.5s linear;
+}
+
+.fade-enter {
+  opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+  opacity: 1;
+  transition: opacity 400ms ease-in;
+}
+
+.fade-leave {
+  opacity: 1;
+}
+
+.fade-leave.fade-leave-active {
+  opacity: 0.01;
+  transition: opacity 200ms ease-in;
+}
+
+@keyframes slide {
+  0% {
+    opacity:0;
+    transform: translateY(40%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slide2 {
+  0% {
+    opacity:1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(40%);
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity:0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
