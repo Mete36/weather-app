@@ -48,7 +48,7 @@ const WeatherCard = (props) => {
         <Card className={`data_card ${activeClass}`}>
             <CardContent className={classes.cardContent}>
                 <Row align="center">
-                    <Col lg={6}>
+                    <Col lg={10}>
                         <div className={classes.information}>
                             <div className={classes.title}>{props.city}</div>
                             <div>---</div>
@@ -56,7 +56,7 @@ const WeatherCard = (props) => {
                             <div className={classes.temp}>{props.temp}&#176;</div>
                         </div>
                     </Col>
-                    <Col lg={6}>
+                    <Col lg={2}>
                         <WeatherIcon iconId={props.iconId}/>
                     </Col>
                 </Row>
