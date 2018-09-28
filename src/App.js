@@ -1,62 +1,71 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import SearchBar from './SearchBar';
 import SearchList from './SearchList';
+
+
+import bgImage from './images/image2.jpg';
 
 class App extends Component {
 
   state = {
     searchValue: '',
-    searchData: [],
-    renderList: false
+    renderList: false,
+    forecast: [],
+    loading: false
   }
 
   apiCall = (city) => {
     const APIKEY = "20439ec0303048d44a639552c9936259";
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${APIKEY}`)
+    fetch(`https://api.openweathermap.org/data/2.5/forecast/daily?q=${encodeURIComponent(city)}&cnt=5&units=metric&APPID=${APIKEY}`)
     .then(results => {
-      return results.json();
+        return results.json();
     }).then(data => {
       this.setState({
-        searchData:data
+        forecast: data,
+        renderList: true,
+        loading: false
       });
-      console.log(data);
     }).catch(function(error){
       console.log(error);
     })
   }
+
   submitSearch = (e) => {
     e.preventDefault();
-    this.setState({searchValue: e.target.value, renderList: true});
-    const city = e.target.elements.city.value;
-    this.apiCall(city);
-    console.log(this.state.searchData);
+    const city = e.target.value;
+
+    if(city && city !== this.state.searchValue){
+      this.setState({
+        renderList: false,
+        loading: true
+      });
+      this.setState({searchValue: city});
+      this.apiCall(city);
+    }
   }
+
   handleChange = (e) => {
     this.setState({searchValue: e.target.value});
   }
+
   renderList = () => {
-    if(this.state.renderList){
-      return <SearchList weather={this.state.searchData} />;
+    if(this.state.forecast.cod === '404'){
+      return <div className="validCity">Please enter a valid City name.</div>;
     } else {
-      return 'mete';
+      if(this.state.renderList){
+        return <SearchList data={this.state.forecast} />;
+      }
     }
   }
 
   render() {
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-
         <SearchBar onSubmit={this.submitSearch} />
-        {console.log(this.state.searchData)}
         {this.renderList()}
-        {/* <SearchList weather={this.state.searchData} /> */}
-
+        <div id="bg_image"><img src={bgImage} alt="Background"/></div>
       </div>
     );
   }

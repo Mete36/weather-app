@@ -1,55 +1,33 @@
-import React, {Component} from 'react';
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
+import 'typeface-roboto';
 
-class SearchBar extends Component{
-    
-    // state = {
-    //     searchValue: "",
-    //     searchData: []
-    // }
-
-
-
-    // apiCall = () => {
-    //     const APIKEY = "20439ec0303048d44a639552c9936259";
-    //     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.searchValue}&units=metric&APPID=${APIKEY}`)
-	// 		.then(results => {
-	// 			return results.json();
-	// 		}).then(data => {
-    //             this.setState({searchData:data});
-    //             console.log(this.state.searchData);
-	// 		}).catch(function(error){
-	// 			console.log(error);	
-	// 		})
-    // }
-
-    // submitSearch = (e) => {
-    //     e.preventDefault();
-    //     this.setState({searchValue: e.target.value});
-    //     console.log(this.state.searchValue);
-    //     this.apiCall();
-    // }
-    // handleChange = (e) => {
-    //     this.setState({searchValue: e.target.value});
-    // }
-    // showData = () => {
-    //     if(this.state.data){
-    //         this.state.data.name
-    //     }
-    // }
-
-    render(){
-        return(
-            <div>
-                <form onSubmit={this.props.onSubmit}>
-                <TextField
-                    name="city"
-                    placeholder="Enter City"
-                />
-                </form>
-            </div>
-        )
+const styles = theme => ({
+    root:{
+        ...theme.typography.display4,
+        padding: theme.spacing.unit,
     }
+});
+
+const SearchBar = (props) => {
+
+    const { classes } = props;
+        
+    return(
+        <div>
+            <TextField
+                onChange={props.onSubmit}
+                InputProps={{
+                    classes: {
+                        input: classes.root
+                    }
+                }}
+                name="city"
+                placeholder="Enter City Name"
+            />
+        </div>
+    )
 }
 
-export default SearchBar;
+export default withStyles(styles)(SearchBar);
