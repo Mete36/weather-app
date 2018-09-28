@@ -50,7 +50,7 @@ const WeatherCard = (props) => {
                 <Row align="center">
                     <Col lg={10}>
                         <div className={classes.information}>
-                            <div className={classes.title}>{props.city}</div>
+                            <div className={classes.title}>{props.date}</div>
                             <div>---</div>
                             <div className={classes.weather}>{props.type}</div>
                             <div className={classes.temp}>{props.temp}&#176;</div>
@@ -62,8 +62,7 @@ const WeatherCard = (props) => {
                 </Row>
             </CardContent>
         </Card>
-                
     )
-  }
+}
 
 export default withStyles(styles)(WeatherCard)

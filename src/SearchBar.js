@@ -6,10 +6,7 @@ import 'typeface-roboto';
 const styles = theme => ({
     root:{
         ...theme.typography.display4,
-        // backgroundColor: theme.palette.common.white,
         padding: theme.spacing.unit,
-        // fontSize: '5rem',
-        // textTransform: 'uppercase'
     }
 });
 
@@ -19,8 +16,8 @@ const SearchBar = (props) => {
         
     return(
         <div>
-            <form onSubmit={props.onSubmit}>
             <TextField
+                onChange={props.onSubmit}
                 InputProps={{
                     classes: {
                         input: classes.root
@@ -29,7 +26,6 @@ const SearchBar = (props) => {
                 name="city"
                 placeholder="Enter City Name"
             />
-            </form>
         </div>
     )
 }
