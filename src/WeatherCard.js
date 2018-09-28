@@ -37,14 +37,9 @@ const styles = {
 
 const WeatherCard = (props) => {
     const { classes } = props;
-  
-    const weather = props.weather;
-    console.log(weather);
-  
     const activeClass = props.active ? 'active' : 'inactive';
   
     return(
-        
         <Card className={`data_card ${activeClass}`}>
             <CardContent className={classes.cardContent}>
                 <Row align="center">
